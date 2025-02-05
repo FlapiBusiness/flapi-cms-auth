@@ -7,15 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  tests_build_deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Replace image tag in deployment.yaml for Kubernetes
-        run: |
-          sed -i 's/\${TAG_VERSION}/'${{ github.sha }}'/g' k8s/development/deployment.yaml
 
       - name: Connect to the cluster K3S for deploy
         uses: actions-hub/kubectl@master
