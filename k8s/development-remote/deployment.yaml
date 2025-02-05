@@ -45,15 +45,9 @@ spec:
         - name: KC_HOSTNAME
           value: "dev.auth.flapi.org"
         - name: KEYCLOAK_ADMIN
-          valueFrom:
-            secretKeyRef:
-              name: dev-auth-flapi-keycloack-admin-secret
-              key: KEYCLOAK_ADMIN
+          value: "admin"
         - name: KEYCLOAK_ADMIN_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: dev-auth-flapi-keycloack-admin-secret
-              key: KEYCLOAK_ADMIN_PASSWORD
+          value: "SuperSecurePassword"
         - name: KC_HOSTNAME_ADMIN_URL
           value: "https://dev.auth.flapi.org"
         - name: KC_HTTP_ENABLED
