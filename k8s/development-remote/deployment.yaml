@@ -25,7 +25,7 @@ spec:
             --db-username=$(KC_DB_USERNAME) \
             --db-password=$(KC_DB_PASSWORD) \
             --hostname=dev.auth.flapi.org
-      env:
+        env:
         - name: KC_PROXY
           value: "edge"
         - name: KC_DB
