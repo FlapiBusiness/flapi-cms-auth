@@ -18,6 +18,8 @@ spec:
         image: quay.io/keycloak/keycloak:latest
         args: ["start", "--optimized"]
         env:
+        - name: KC_PROXY
+          value: "edge"
         - name: KC_DB
           value: "mysql"
         - name: KC_DB_URL
