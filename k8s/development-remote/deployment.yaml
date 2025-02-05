@@ -16,7 +16,7 @@ spec:
       containers:
       - name: keycloak
         image: quay.io/keycloak/keycloak:latest
-        args: ["start"]
+        args: ["start", "--optimized"]
         env:
         - name: KC_DB
           value: "mysql"
