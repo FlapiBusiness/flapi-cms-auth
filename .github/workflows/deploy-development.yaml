@@ -21,7 +21,7 @@ jobs:
           args: |
             apply -f k8s/development-remote/namespace.yaml
             -f k8s/development-remote/certificate.yaml
-            -f k8s/development-remote/docker-registry-secret.yaml
+            -f k8s/development-remote/mariadb-registry-secret.yaml
             -f k8s/development-remote/deployment.yaml
             -f k8s/development-remote/ingress.yaml
             -f k8s/development-remote/service.yaml
