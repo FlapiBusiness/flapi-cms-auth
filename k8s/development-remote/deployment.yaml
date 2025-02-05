@@ -21,6 +21,8 @@ spec:
           - |
             /opt/keycloak/bin/kc.sh build &&
             /opt/keycloak/bin/kc.sh start --optimized \
+            --kc-proxy=edge \
+            --db=mariadb \
             --db-url=jdbc:mariadb://109.234.165.225:3306/reco5282_auth_flapi_development-remote \
             --db-username=$(KC_DB_USERNAME) \
             --db-password=$(KC_DB_PASSWORD) \
