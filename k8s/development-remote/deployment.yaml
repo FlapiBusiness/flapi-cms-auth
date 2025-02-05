@@ -16,10 +16,7 @@ spec:
       containers:
       - name: keycloak
         image: quay.io/keycloak/keycloak:latest
-        command: ["/bin/sh", "-c"]
-        args:
-          - |
-            kc.sh build && kc.sh start --optimized
+        args: ["build"]
         env:
         - name: KC_PROXY
           value: "edge"
