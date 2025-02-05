@@ -40,5 +40,19 @@ spec:
               key: DB_PASSWORD
         - name: KC_HOSTNAME
           value: "dev.auth.flapi.org"
+        - name: KC_HTTPS_CERTIFICATE_FILE
+          value: "/etc/x509/https/tls.crt"
+        - name: KC_HTTPS_CERTIFICATE_KEY_FILE
+          value: "/etc/x509/https/tls.key"
+        - name: KC_HTTP_ENABLED
+          value: "false"
+      volumeMounts:
+        - name: keycloak-tls
+          mountPath: "/etc/x509/https"
+          readOnly: true
+      volumes:
+        - name: keycloak-tls
+          secret:
+            secretName: dev-auth-flapi-tls
         ports:
         - containerPort: 8080
