@@ -19,7 +19,7 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - |
-            keycloak build && keycloak start --optimized
+            /opt/keycloak/bin/kc.sh build && /opt/keycloak/bin/kc.sh start --optimized
         env:
         - name: KC_PROXY
           value: "edge"
