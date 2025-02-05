@@ -25,7 +25,11 @@ spec:
             --db-username=$(KC_DB_USERNAME) \
             --db-password=$(KC_DB_PASSWORD) \
             --hostname=dev.auth.flapi.org \
-            --hostname-strict=false
+            --hostname-strict=false \
+            --hostname-strict-https=false \
+            --proxy=edge \
+            --http-enabled=true \
+            --http-port=8080
         env:
         - name: KC_PROXY
           value: "edge"
