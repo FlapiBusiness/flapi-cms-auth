@@ -1,0 +1,31 @@
+name: deploy-development
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+jobs:
+  tests_build_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Replace image tag in deployment.yaml for Kubernetes
+        run: |
+          sed -i 's/\${TAG_VERSION}/'${{ github.sha }}'/g' k8s/development/deployment.yaml
+
+      - name: Connect to the cluster K3S for deploy
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
+        with:
+          args: |
+            apply -f k8s/development-remote/namespace.yaml
+            -f k8s/development-remote/certificate.yaml
+            -f k8s/development-remote/docker-registry-secret.yaml
+            -f k8s/development-remote/deployment.yaml
+            -f k8s/development-remote/ingress.yaml
+            -f k8s/development-remote/service.yaml

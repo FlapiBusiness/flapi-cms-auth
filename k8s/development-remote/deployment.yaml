@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-auth-flapi-deployment
+  namespace: dev-auth-flapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev-auth-flapi
+  template:
+    metadata:
+      labels:
+        app: dev-auth-flapi
+    spec:
+      containers:
+      - name: keycloak
+        image: quay.io/keycloak/keycloak:latest
+        args: ["start"]
+        env:
+        - name: KC_DB
+          value: "mysql"
+        - name: KC_DB_URL
+          value: "jdbc:mysql://109.234.165.225:3306/reco5282_auth_flapi_development-remote"
+        - name: KC_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: dev-auth-flapi-db-secret
+              key: DB_USER
+        - name: KC_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: dev-auth-flapi-db-secret
+              key: DB_PASSWORD
+        - name: KC_HOSTNAME
+          value: "dev.auth.flapi.org"
+        ports:
+        - containerPort: 8080
