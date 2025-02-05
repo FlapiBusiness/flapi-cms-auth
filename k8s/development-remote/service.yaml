@@ -5,7 +5,7 @@ metadata:
   namespace: dev-auth-flapi
 spec:
   ports:
-  - port: 8443
-    targetPort: 8443
+  - port: 8080
+    targetPort: 8080
   selector:
     app: dev-auth-flapi
