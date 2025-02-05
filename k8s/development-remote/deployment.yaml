@@ -45,12 +45,12 @@ spec:
               key: DB_PASSWORD
         - name: KC_HOSTNAME
           value: "dev.auth.flapi.org"
-        - name: KEYCLOAK_ADMIN
+        - name: KC_BOOTSTRAP_ADMIN_USERNAME
           valueFrom:
             secretKeyRef:
               name: dev-auth-flapi-keycloack-admin-secret
               key: KEYCLOAK_ADMIN
-        - name: KEYCLOAK_ADMIN_PASSWORD
+        - name: KC_BOOTSTRAP_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
               name: dev-auth-flapi-keycloack-admin-secret
