@@ -31,7 +31,7 @@ spec:
         - name: KC_DB
           value: "mariadb"
         - name: KC_DB_URL
-          value: "jdbc:mysql://109.234.165.225:3306/reco5282_auth_flapi_development-remote"
+          value: "jdbc:mariadb://109.234.165.225:3306/reco5282_auth_flapi_development-remote"
         - name: KC_DB_USERNAME
           valueFrom:
             secretKeyRef:
