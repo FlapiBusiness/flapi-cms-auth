@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prod-auth-flapi-deployment
-  namespace: prod-auth-flapi
+  name: staging-auth-flapi-deployment
+  namespace: staging-auth-flapi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: prod-auth-flapi
+      app: staging-auth-flapi
   template:
     metadata:
       labels:
-        app: prod-auth-flapi
+        app: staging-auth-flapi
     spec:
       containers:
       - name: keycloak
@@ -21,10 +21,10 @@ spec:
           - |
             /opt/keycloak/bin/kc.sh build &&
             /opt/keycloak/bin/kc.sh start --optimized \
-            --db-url=jdbc:mariadb://109.234.165.225:3306/reco5282_auth_flapi_production \
+            --db-url=jdbc:mariadb://109.234.165.225:3306/reco5282_auth_flapi_staging \
             --db-username=$(KC_DB_USERNAME) \
             --db-password=$(KC_DB_PASSWORD) \
-            --hostname=auth.flapi.org \
+            --hostname=staging.auth.flapi.org \
             --hostname-strict=false \
             --proxy-headers=xforwarded \
             --http-enabled=true \
@@ -35,31 +35,31 @@ spec:
         - name: KC_DB
           value: "mariadb"
         - name: KC_DB_URL
-          value: "jdbc:mariadb://109.234.165.225:3306/reco5282_auth_flapi_production"
+          value: "jdbc:mariadb://109.234.165.225:3306/reco5282_auth_flapi_staging"
         - name: KC_DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: prod-auth-flapi-db-secret
+              name: staging-auth-flapi-db-secret
               key: DB_USER
         - name: KC_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: prod-auth-flapi-db-secret
+              name: staging-auth-flapi-db-secret
               key: DB_PASSWORD
         - name: KC_HOSTNAME
-          value: "auth.flapi.org"
+          value: "staging.auth.flapi.org"
         - name: KC_BOOTSTRAP_ADMIN_USERNAME
           valueFrom:
             secretKeyRef:
-              name: prod-auth-flapi-keycloack-admin-secret
+              name: staging-auth-flapi-keycloack-admin-secret
               key: KEYCLOAK_ADMIN
         - name: KC_BOOTSTRAP_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: prod-auth-flapi-keycloack-admin-secret
+              name: staging-auth-flapi-keycloack-admin-secret
               key: KEYCLOAK_ADMIN_PASSWORD
         - name: KC_HOSTNAME_ADMIN_URL
-          value: "https://auth.flapi.org"
+          value: "https://staging.auth.flapi.org"
         - name: KC_HTTP_ENABLED
           value: "true"
         ports:

@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: prod-auth-flapi-service
-  namespace: prod-auth-flapi
+  name: staging-auth-flapi-service
+  namespace: staging-auth-flapi
 spec:
   ports:
   - port: 8080
     targetPort: 8080
   selector:
-    app: prod-auth-flapi
+    app: staging-auth-flapi
