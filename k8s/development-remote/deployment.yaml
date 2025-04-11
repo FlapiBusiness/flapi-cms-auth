@@ -16,6 +16,7 @@ spec:
       containers:
       - name: keycloak
         image: docker.io/${DOCKER_HUB_USERNAME}/keycloak-flapi-theme:${TAG_VERSION}
+        imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
           - |
