@@ -9,3 +9,4 @@ RUN echo "🎯 Contenu du dossier /opt/keycloak/themes/" && ls -la /opt/keycloak
 # Build the theme at the time of the image build
 RUN /opt/keycloak/bin/kc.sh build
 RUN /opt/keycloak/bin/kc.sh show-config | grep flapi-theme || echo "❌ flapi-theme non détecté"
+RUN echo "💡 Dossier theme copié dans l'image :" && ls -R /opt/keycloak/themes/flapi-theme
