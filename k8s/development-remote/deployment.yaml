@@ -28,7 +28,11 @@ spec:
             --hostname-strict=false \
             --proxy-headers=xforwarded \
             --http-enabled=true \
-            --http-port=8080
+            --http-port=8080 \
+            --spi-theme-default=flapi-theme \
+            --spi-theme-static-max-age=-1 \
+            --spi-theme-cache-themes=false \
+            --spi-theme-cache-templates=false
         env:
         - name: KC_PROXY
           value: "edge"
