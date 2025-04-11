@@ -1,11 +1,14 @@
 FROM quay.io/keycloak/keycloak:latest
 
-# Copy your theme in the folder expected by KEYCLOAK
+USER root
+
+# Copy theme
 COPY flapi-theme/ /opt/keycloak/themes/flapi-theme
 
-RUN echo "🎯 Contenu du dossier /opt/keycloak/themes/" && ls -la /opt/keycloak/themes/ && \
-    echo "📂 Contenu de flapi-theme/login :" && ls -la /opt/keycloak/themes/flapi-theme/login
+# Fix permissions
+RUN chown -R 1000:0 /opt/keycloak/themes/flapi-theme
 
-# Build the theme at the time of the image build
-RUN /opt/keycloak/bin/kc.sh build
-RUN /opt/keycloak/bin/kc.sh show-config
+USER 1000
+
+# Build avec profil explicite
+RUN /opt/keycloak/bin/kc.sh build --spi-theme-default=flapi-theme --features=preview --db=dev-mem

@@ -20,7 +20,6 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - |
-            /opt/keycloak/bin/kc.sh build &&
             /opt/keycloak/bin/kc.sh start --optimized \
             --spi-theme-static-max-age=-1 \
             --spi-theme-cache-themes=false \
