@@ -62,5 +62,7 @@ spec:
           value: "https://staging.auth.flapi.org"
         - name: KC_HTTP_ENABLED
           value: "true"
+        - name: KC_THEME_CACHE_ENABLED
+          value: "false"
         ports:
         - containerPort: 8080
