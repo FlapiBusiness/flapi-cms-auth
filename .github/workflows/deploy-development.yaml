@@ -46,6 +46,7 @@ jobs:
             -c "ls -la /opt/keycloak/themes/ && ls -la /opt/keycloak/themes/flapi-theme/login"
 
           docker run --rm \
+            --entrypoint /opt/keycloak/bin/kc.sh \
             ${{ secrets.DOCKER_HUB_USERNAME }}/keycloak-flapi-theme:develop-${{ github.sha }} \
             show-config | grep flapi
       
