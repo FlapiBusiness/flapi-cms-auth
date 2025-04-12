@@ -29,6 +29,7 @@ jobs:
 
       - name: Replace image tag in deployment.yaml for Kubernetes
         run: |
+          echo DOCKER_HUB_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}} | sed 's/./& /g'
           sed -i 's|\${TAG_VERSION}|develop-${{ github.sha }}|g' k8s/development-remote/deployment.yaml
           sed -i 's|\${DOCKER_HUB_USERNAME}|${{ secrets.DOCKER_HUB_USERNAME }}|g' k8s/development-remote/deployment.yaml
 
@@ -40,9 +41,11 @@ jobs:
       - name: Inspect built image (debug)
         run: |
           docker run --rm ${{ secrets.DOCKER_HUB_USERNAME }}/keycloak-flapi-theme:develop-${{ github.sha }} \
-          /bin/sh -c "ls -la /opt/keycloak/themes/ && ls -la /opt/keycloak/themes/flapi-theme/login"
-          /opt/keycloak/bin/kc.sh show-config | grep flapi
+            /bin/sh -c "ls -la /opt/keycloak/themes/ && ls -la /opt/keycloak/themes/flapi-theme/login"
 
+          docker run --rm ${{ secrets.DOCKER_HUB_USERNAME }}/keycloak-flapi-theme:develop-${{ github.sha }} \
+            /opt/keycloak/bin/kc.sh show-config | grep flapi
+      
 
       - name: Connect to the cluster K3S for deploy
         uses: actions-hub/kubectl@master
