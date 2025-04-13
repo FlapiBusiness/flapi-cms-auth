@@ -37,18 +37,6 @@ jobs:
         run: |
           echo "Image in deployment.yaml:"
           grep 'image:' k8s/development-remote/deployment.yaml
-
-      - name: Inspect built image (debug)
-        run: |
-          docker run --rm \
-            --entrypoint /bin/sh \
-            ${{ secrets.DOCKER_HUB_USERNAME }}/keycloak-flapi-theme:develop-${{ github.sha }} \
-            -c "ls -la /opt/keycloak/themes/ && ls -la /opt/keycloak/themes/flapi-theme/login"
-
-          docker run --rm \
-            --entrypoint /opt/keycloak/bin/kc.sh \
-            ${{ secrets.DOCKER_HUB_USERNAME }}/keycloak-flapi-theme:develop-${{ github.sha }} \
-            show-config | grep flapi
       
 
       - name: Connect to the cluster K3S for deploy
