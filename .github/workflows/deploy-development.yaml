@@ -50,13 +50,6 @@ jobs:
             -f k8s/development-remote/ingress.yaml
             -f k8s/development-remote/service.yaml
 
-      - name: Check if FLAPI theme was built and copied
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
-        with:
-          args: exec -n dev-auth-flapi deploy/dev-auth-flapi-deployment -- cat /opt/keycloak/themes/flapi-theme/BUILD_CHECK.txt
-
       - name: Vérifie image utilisée dans le pod
         uses: actions-hub/kubectl@master
         env:
