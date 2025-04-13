@@ -37,6 +37,18 @@ jobs:
         run: |
           echo "Image in deployment.yaml:"
           grep 'image:' k8s/development-remote/deployment.yaml
+
+      - name: Inspect built image (debug)
+        run: |
+          docker run --rm \
+            --entrypoint /bin/sh \
+            ${{ secrets.DOCKER_HUB_USERNAME }}/keycloak-flapi-theme:develop-${{ github.sha }} \
+            -c "ls -la /opt/keycloak/themes/ && ls -la /opt/keycloak/themes/flapi-theme/login"
+
+          docker run --rm \
+            --entrypoint /opt/keycloak/bin/kc.sh \
+            ${{ secrets.DOCKER_HUB_USERNAME }}/keycloak-flapi-theme:develop-${{ github.sha }} \
+            show-config | grep flapi
       
 
       - name: Connect to the cluster K3S for deploy
@@ -52,3 +64,19 @@ jobs:
             -f k8s/development-remote/deployment.yaml
             -f k8s/development-remote/ingress.yaml
             -f k8s/development-remote/service.yaml
+
+      - name: Check running image in cluster
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
+        with:
+          args: get pod -n dev-auth-flapi -o jsonpath="{.items[0].spec.containers[0].image}"
+
+      - name: Inspect live pod theme (proof test)
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
+        with:
+          args: exec -n dev-auth-flapi deploy/dev-auth-flapi-deployment -- \
+            cat /opt/keycloak/themes/flapi-theme/login/index.ftl
+

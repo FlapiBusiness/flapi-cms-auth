@@ -20,7 +20,7 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - |
-            /opt/keycloak/bin/kc.sh start --optimized \
+            /opt/keycloak/bin/kc.sh start \
             --db-url=jdbc:mariadb://109.234.165.225:3306/reco5282_auth_flapi_development-remote \
             --db-username=$(KC_DB_USERNAME) \
             --db-password=$(KC_DB_PASSWORD) \
@@ -28,7 +28,10 @@ spec:
             --hostname-strict=false \
             --proxy-headers=xforwarded \
             --http-enabled=true \
-            --http-port=8080
+            --http-port=8080 \
+            --spi-theme-static-max-age=-1 \
+            --spi-theme-cache-themes=false \
+            --spi-theme-cache-templates=false
         env:
         - name: KC_PROXY
           value: "edge"
