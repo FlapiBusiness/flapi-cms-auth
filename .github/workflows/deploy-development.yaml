@@ -53,6 +53,9 @@ jobs:
             -f k8s/development-remote/ingress.yaml
             -f k8s/development-remote/service.yaml
 
+      - name: Show full deployment.yaml
+        run: cat k8s/development-remote/deployment.yaml
+
       - name: Check running image in cluster
         uses: actions-hub/kubectl@master
         env:
@@ -65,6 +68,5 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
         with:
-          args: exec -n dev-auth-flapi deploy/dev-auth-flapi-deployment -- \
-            cat /opt/keycloak/themes/flapi-theme/login/index.ftl
+          args: exec -n dev-auth-flapi deploy/dev-auth-flapi-deployment -- cat /opt/keycloak/themes/flapi-theme/login/index.ftl
 
