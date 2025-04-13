@@ -52,6 +52,13 @@ jobs:
             -f k8s/development-remote/deployment.yaml
             -f k8s/development-remote/ingress.yaml
             -f k8s/development-remote/service.yaml
+      - name: Inspect theme in built image
+        run: |
+          docker run --rm
+          --entrypoint /bin/sh
+          ${{ secrets.DOCKER_HUB_USERNAME }}/keycloak-flapi-theme:develop-${{ github.sha }}
+          -c "ls -la /opt/keycloak/themes && ls -la /opt/keycloak/themes/flapi-theme/login || echo 'Theme not found'"
+
 
       - name: Show full deployment.yaml
         run: cat k8s/development-remote/deployment.yaml
