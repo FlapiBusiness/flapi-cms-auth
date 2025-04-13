@@ -13,4 +13,5 @@ RUN /opt/keycloak/bin/kc.sh build
 
 # Utilise le mode optimisé (plus léger, pour prod)
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
-CMD ["start", "--optimized"]
+CMD ["start", "--optimized", "--hostname=localhost", "--hostname-strict=false", "--http-enabled=true"]
+
