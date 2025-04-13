@@ -54,26 +54,10 @@ jobs:
             -f k8s/development-remote/service.yaml
       - name: Inspect theme in built image
         run: |
-          docker run --rm
-          --entrypoint /bin/sh
-          ${{ secrets.DOCKER_HUB_USERNAME }}/keycloak-flapi-theme:develop-${{ github.sha }}
-          -c "ls -la /opt/keycloak/themes && ls -la /opt/keycloak/themes/flapi-theme/login || echo 'Theme not found'"
+          docker run --rm --entrypoint /bin/sh ${{ secrets.DOCKER_HUB_USERNAME }}/keycloak-flapi-theme:develop-${{ github.sha }} -c "ls -la /opt/keycloak/themes && ls -la /opt/keycloak/themes/flapi-theme/login || echo 'Theme not found'"
 
-
-      - name: Show full deployment.yaml
-        run: cat k8s/development-remote/deployment.yaml
-
-      - name: Check running image in cluster
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
-        with:
-          args: get pod -n dev-auth-flapi -o jsonpath="{.items[0].spec.containers[0].image}"
-
-      - name: Inspect live pod theme (proof test)
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
-        with:
-          args: exec -n dev-auth-flapi deploy/dev-auth-flapi-deployment -- cat /opt/keycloak/themes/flapi-theme/login/index.ftl
+      - name: Debug – List theme content before build
+        run: |
+          ls -la flapi-theme/
+          cat flapi-theme/login/theme.properties || echo "theme.properties"
 
