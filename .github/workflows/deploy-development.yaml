@@ -54,38 +54,6 @@ jobs:
             -f k8s/development-remote/service.yaml
 
 
-      - name: Pause pour laisser les pods démarrer
-        run: sleep 15
-
-      - name: Lister les pods dans le namespace
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
-        with:
-          args: get pods -n dev-auth-flapi -o wide
-
-      - name: Inspecter les événements du namespace
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
-        with:
-          args: get events -n dev-auth-flapi --sort-by='.lastTimestamp'
-
-      - name: Voir les logs du pod principal
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
-        with:
-          args: logs -n dev-auth-flapi -l app=dev-auth-flapi --tail=100
-
-      - name: Décrire le pod principal
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
-        with:
-          args: describe pod -n dev-auth-flapi -l app=dev-auth-flapi
-
-
 
 
 
