@@ -14,18 +14,10 @@ spec:
         app: dev-auth-flapi
     spec:
       containers:
-      - name: keycloak
-        image: docker.io/${DOCKER_HUB_USERNAME}/keycloak-flapi-theme:${TAG_VERSION}
+      - name: dev-auth-flapi
+        image: corentin35/auth-flapi:dev-${TAG_VERSION}
         imagePullPolicy: Always
         env:
-        - name: KC_THEME
-          value: "flapi-theme"
-        - name: KC_THEME_TYPE
-          value: "login"
-        - name: KC_SPI_THEME_CACHE_TEMPLATES
-          value: "false"
-        - name: KC_SPI_THEME_CACHE_THEMES
-          value: "false"
         - name: KC_PROXY
           value: "edge"
         - name: KC_DB
@@ -60,3 +52,5 @@ spec:
           value: "true"
         ports:
         - containerPort: 8080
+      imagePullSecrets:
+        - name: regcred
