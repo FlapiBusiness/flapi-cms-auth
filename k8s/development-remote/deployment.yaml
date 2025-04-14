@@ -17,6 +17,19 @@ spec:
       - name: dev-auth-flapi
         image: corentin35/auth-flapi:dev-${TAG_VERSION}
         imagePullPolicy: Always
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            /opt/keycloak/bin/kc.sh build &&
+            /opt/keycloak/bin/kc.sh start --optimized \
+            --db-url=jdbc:mariadb://109.234.165.225:3306/reco5282_auth_flapi_staging \
+            --db-username=$(KC_DB_USERNAME) \
+            --db-password=$(KC_DB_PASSWORD) \
+            --hostname=staging.auth.flapi.org \
+            --hostname-strict=false \
+            --proxy-headers=xforwarded \
+            --http-enabled=true \
+            --http-port=8080
         env:
         - name: KC_PROXY
           value: "edge"
