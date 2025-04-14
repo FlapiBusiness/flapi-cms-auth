@@ -19,6 +19,13 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Apply DockerHub registry secret
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
+        with:
+          args: apply -f k8s/development-remote/docker-registry-secret.yaml
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
@@ -45,6 +52,14 @@ jobs:
             -f k8s/development-remote/deployment.yaml
             -f k8s/development-remote/ingress.yaml
             -f k8s/development-remote/service.yaml
+
+      - name: Vérifie que le secret regcred est bien présent
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
+        with:
+          args: get secret regcred -n dev-auth-flapi
+
 
 
 
