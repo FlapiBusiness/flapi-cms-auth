@@ -70,6 +70,13 @@ jobs:
       - name: Pause pour laisser le pod redémarrer
         run: sleep 10
 
+      - name: Liste les pods après restart
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
+        with:
+          args: get pods -n dev-auth-flapi -o wide
+
       - name: Wait for deployment to be ready
         uses: actions-hub/kubectl@master
         env:
