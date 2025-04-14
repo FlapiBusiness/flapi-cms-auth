@@ -52,10 +52,8 @@ jobs:
             -f k8s/development-remote/deployment.yaml
             -f k8s/development-remote/ingress.yaml
             -f k8s/development-remote/service.yaml
-            
-            
-            - name: Pause pour laisser les pods démarrer
-            
+
+
       - name: Pause pour laisser les pods démarrer
         run: sleep 15
 
