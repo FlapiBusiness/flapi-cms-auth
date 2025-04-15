@@ -14,8 +14,9 @@ spec:
         app: staging-auth-flapi
     spec:
       containers:
-      - name: keycloak
-        image: quay.io/keycloak/keycloak:latest
+      - name: staging-auth-flapi
+        image: corentin35/auth-flapi:staging-${TAG_VERSION}
+        imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
           - |
@@ -66,3 +67,5 @@ spec:
           value: "false"
         ports:
         - containerPort: 8080
+      imagePullSecrets:
+        - name: regcred

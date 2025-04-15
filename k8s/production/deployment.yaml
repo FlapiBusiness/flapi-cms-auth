@@ -14,8 +14,9 @@ spec:
         app: prod-auth-flapi
     spec:
       containers:
-      - name: keycloak
-        image: quay.io/keycloak/keycloak:latest
+      - name: prod-auth-flapi
+        image: corentin35/auth-flapi:prod-${TAG_VERSION}
+        imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
           - |
@@ -64,3 +65,5 @@ spec:
           value: "true"
         ports:
         - containerPort: 8080
+      imagePullSecrets:
+        - name: regcred
