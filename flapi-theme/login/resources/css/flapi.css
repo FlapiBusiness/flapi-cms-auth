@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
+    --gray-200: #222B39;
+    --gray-400: #35424D;
+    --gray-500: #1B232D;
     --gray-700: #101623;
     --primary-300: #BDB3FF;
     --primary-400: #8472F3;
     --primary-500: #6B59D9;
+    --light-300: rgba(255, 255, 255, 0.3);
+    --light-400: #F5F4FB;
+    --red-500: #EC364B;
 }
 
 .flapi__login--html {
@@ -21,7 +27,11 @@
 
 .flapi__login--container {
     background: transparent;
-    max-width: 500px;
+    max-width: 400px;
+    padding: 12px;
+    width: 100%;
+    display: grid;
+    gap: 16px;
 }
 
 
@@ -30,12 +40,12 @@
 }
 
 .flapi__login--button {
-    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-duration: .15s;
-    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
     color: #FFFFFF;
     line-height: 1.5rem;
-    font-weight: 500;
+    font-weight: 600;
     padding: 12px 16px;
     border: 1px solid transparent;
     display: flex;
@@ -59,7 +69,237 @@
 }
 
 .flapi__login--button:disabled,
+.flapi__login--button.loading,
 .flapi__login--button:disabled:hover,
 .flapi__login--button:disabled:active {
+    background-color: var(--primary-300);
+}
+
+#kc-header-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+div.kc-logo-text {
+    background-image: url(../img/flapi-logo-text.png);
+    background-repeat: no-repeat;
+    height: 48px;
+    width: 164px;
+    margin-bottom: 8px;
+}
+
+div.kc-logo-text span {
+    display: none;
+}
+
+.flapi__login--input {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    color: #FFFFFF;
+    padding: 0 0 0 12px;
+    background: var(--gray-400);
+    border-color: transparent;
+    border-width: 2px;
+    border-radius: 4px;
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-family: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    margin: 0;
+    font-size: 14px;
+}
+
+.flapi__login--input:hover {
+    border-color: var(--light-300)
+}
+
+.flapi__login--input:focus {
+    background: var(--gray-400);
+    border-color: var(--primary-400)
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+#kc-form-login {
+    display: grid;
+    gap: 16px;
+}
+
+.flapi__login--label {
+    color: var(--light-400);
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.flapi__login--input-group {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flapi__login--password-visibility {
+    width: 40px;
+    height: 48px;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: .15s;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    color: #FFFFFF;
+    line-height: 1.5rem;
+    border: 1px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 6px 6px 0;
+    user-select: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.flapi__login--input#password {
+    border-radius: 6px 0 0 6px;
+}
+
+
+.flapi__login--password-visibility,
+.flapi__login--password-visibility:active,
+.flapi__login--password-visibility:hover:active {
+    background: var(--gray-200);
+}
+
+.flapi__login--password-visibility:hover {
+    background-color: var(--gray-500);
+}
+
+.checkbox input[type="checkbox"] {
+    position: relative;
+    margin: 0;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gray-400);
+    border-radius: 4px;
+    background-color: var(--gray-500);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.checkbox input[type="checkbox"]:hover {
+    border-color: var(--light-300);
+}
+
+.checkbox input[type="checkbox"]:checked {
     background-color: var(--primary-400);
+    border-color: var(--primary-400);
+}
+
+.checkbox input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    width: 4px;
+    height: 9px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox {
+    user-select: none;
+}
+
+.checkbox label {
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+    gap: 8px;
+    color: var(--light-400);
+    font-size: 12px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+:focus-visible {
+    outline: none
+}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+#input-error {
+    animation: slideFromLeft 0.4s ease-out forwards;
+    color: var(--red-500);
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 8px;
+}
+
+.form-group {
+    display: grid;
+}
+
+.flapi__login--form-setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--primary-300);
+    text-decoration-thickness: 2px !important;
+    text-underline-offset: 4px;
+
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--primary-300);
+}
+
+.alert-error {
+    margin-bottom: 10px;
+}
+
+#kc-registration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--light-400);
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 500;
+    margin-top: 16px;
 }
