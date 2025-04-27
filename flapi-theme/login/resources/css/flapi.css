@@ -298,7 +298,7 @@ a:focus {
     color: var(--primary-300);
 }
 
-.alert-error, .alert-success, .alert-warning {
+.alert-error, .alert-success, .alert-warning, .alert-info {
     margin-bottom: 10px;
 }
 
