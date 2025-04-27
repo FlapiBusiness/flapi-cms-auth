@@ -10,7 +10,16 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: admin
     command:
       - start-dev
+      - --import-realm
       - --http-enabled=true
       - --hostname-strict=false
     volumes:
       - ./flapi-theme:/opt/keycloak/themes/flapi-theme:ro
+      - ./exports/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025" # Interface web
+      - "1025:1025" # Port SMTP
+

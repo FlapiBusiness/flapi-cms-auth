@@ -13,6 +13,11 @@
     --red-500: #EC364B;
 }
 
+body {
+    color: var(--light-400);
+    font-size: 14px;
+}
+
 .flapi__login--html {
     font-family: 'Open Sans', sans-serif;
 }
@@ -132,7 +137,7 @@ div.kc-logo-text span {
     margin-bottom: 0;
 }
 
-#kc-form-login {
+#kc-form-login, #kc-passwd-update-form {
     display: grid;
     gap: 16px;
 }
@@ -171,7 +176,7 @@ div.kc-logo-text span {
 }
 
 
-.flapi__login--input#password {
+.flapi__login--input[type="password"] {
     border-radius: 6px 0 0 6px;
 }
 
@@ -253,7 +258,7 @@ div.kc-logo-text span {
 }
 
 
-#input-error {
+.flapi__login--input-error-message {
     animation: slideFromLeft 0.4s ease-out forwards;
     color: var(--red-500);
     font-size: 12px;
@@ -293,7 +298,7 @@ a:focus {
     color: var(--primary-300);
 }
 
-.alert-error {
+.alert-error, .alert-success, .alert-warning {
     margin-bottom: 10px;
 }
 
@@ -334,4 +339,28 @@ a:focus {
 
 .flapi__reset-password__settings #kc-form-buttons {
     margin: 18px 0;
+}
+
+.grid {
+    display: grid;
+}
+
+.instruction {
+    margin: 16px 0;
+}
+
+.flapi__login-update-profile--container .col-md-10 {
+    width: 100% !important;
+}
+
+.flapi__login-update-profile--container .subtitle {
+    display: none;
+}
+
+.flapi__login-update-profile--buttons {
+    margin-top: 16px;
+}
+
+.flapi__update-password--setting .checkbox {
+    margin: 16px 0;
 }
