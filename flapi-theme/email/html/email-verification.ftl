@@ -7,7 +7,7 @@
         <#if user.firstName??>
             Bonjour <strong>${user.firstName}</strong> 👋,
         <#else>
-            Bonjour <strong>${user.username}</strong> 👋,
+            Bonjour 👋,
         </#if>
         <br><br>
         Merci de vous être inscrit sur Flapi. Pour activer votre compte, cliquez sur le bouton ci-dessous afin de vérifier votre adresse email.<br><br>
