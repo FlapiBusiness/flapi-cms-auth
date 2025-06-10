@@ -5,7 +5,7 @@ export MSYS_NO_PATHCONV=1
 
 # Config
 KC_USER="modricfoot@gmail.com"
-KC_PASSWORD="admin"
+KC_PASSWORD=""
 KC_REALM="master"
 KC_CLIENT_ID="admin-cli"
 KC_HOST="http://localhost:8080"
