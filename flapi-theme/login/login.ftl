@@ -84,7 +84,7 @@
             <div id="kc-registration-container">
                 <div id="kc-registration">
                     <span>${msg("noAccount")} <a tabindex="8"
-                                                 href="http://localhost:1460/signup">${msg("doRegister")}</a></span>
+                                                 href="https://dev.hub.flapi.org/signup">${msg("doRegister")}</a></span>
                 </div>
             </div>
         </#if>
